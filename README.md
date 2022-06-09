@@ -10,4 +10,18 @@ Python 3
 
 ## Usage
 
+To activate virtual environment:
+
+Windows
+
+```
+.venv/Scripts/activate.bat
+```
+
+Linux/Mac
+
+```
+source .venv/bin/activate
+```
+
 Problem solutions will be written in the most general format possible with specific problem answers applied to yield a specific solution printed to STDIN.
