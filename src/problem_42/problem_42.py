@@ -6,21 +6,43 @@
 
 from typing import *
 
+# Caches triangle sequence values
+triangle_sequence_nums_cache = [1]
+
 
 def triangle_sequence(n: int) -> int:
+    # Note: closed form for the sum of the first n natural numbers
+
     return (n * (n + 1)) // 2
 
 
 def is_triangle_word(word: str) -> bool:
-    return False
+    val: int = 0
+    for char in word:
+        val += ord(char) - ord('A') + 1
+
+    # Now, check if val is in the triangle sequence
+    result: bool = False
+
+    # If the value is greater than what is in the cache, we need to populate the cache
+    if val > triangle_sequence_nums_cache[len(triangle_sequence_nums_cache) - 1]:
+        # Populate until it exceeds val
+        i: int = len(triangle_sequence_nums_cache)
+
+        while (curr_num := triangle_sequence(i)) <= val:
+            triangle_sequence_nums_cache.append(curr_num)
+            i += 1
+
+    result = val in triangle_sequence_nums_cache
+    return result
 
 
 def main():
     words = []
     with open("words.txt", "r") as file:
         for line in file:
-            for word in line.split():
-                words.append(word)
+            for word in line.split(","):
+                words.append(word.strip('"'))
 
     count = 0
     for word in words:
