@@ -2,30 +2,21 @@
 # For example, 2143 is a 4-digit pandigital and is also prime.
 # What is the largest n-digit pandigital prime that exists?
 
-from util import is_prime
+from util import is_prime, swap, generate_permutations
 from typing import *
 
 
-def swap(arr: List[any], l: int, r: int) -> None:
-    arr[l], arr[r] = arr[r], arr[l]
+def digit_combiner(digits: List[int]) -> int:
+    # Concatenate digits in current order as they are into a number
+    # Then, add to the set and return
+    num: int = 0
+    for i in range(0, len(digits)):
+        num += digits[len(digits) - 1 - i] * (10 ** i)
+    return num
 
 
 def generate_digit_permutations(digits: List[int], start_index: int) -> Set[int]:
-    if start_index == len(digits):
-        # Concatenate digits in current order as they are into a number
-        # Then, add to the set and return
-        num: int = 0
-        for i in range(0, len(digits)):
-            num += digits[len(digits) - 1 - i] * (10 ** i)
-        return {num}
-    else:
-        S = set()
-        for i in range(start_index, len(digits)):
-            # swap digits at starting index and all indices to the left of it
-            swap(digits, start_index, i)
-            S = S.union(generate_digit_permutations(digits, start_index + 1))
-            swap(digits, start_index, i)
-        return S
+    return generate_permutations(digits, digit_combiner)
 
 
 def largest_pandigital_n_digits(n: int) -> Optional[int]:
