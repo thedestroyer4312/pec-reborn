@@ -30,3 +30,12 @@ def generate_permutations(arr: List[A], f: Callable[[List[A]], B]) -> Set[B]:
             swap(arr, start_index, i)
         return S
     return recursive_func(0)
+
+
+def digit_combiner(digits: List[int]) -> int:
+    # Concatenate digits in current order as they are into a number
+    # Then, add to the set and return
+    num: int = 0
+    for i in range(0, len(digits)):
+        num += digits[len(digits) - 1 - i] * (10 ** i)
+    return num
