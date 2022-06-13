@@ -1,5 +1,5 @@
 from sympy.ntheory.primetest import mr
-from typing import *
+from typing import TypeVar, Set, Callable, List
 
 N = 3825123056546413051
 assert(N == 149491*747451*34233211)
