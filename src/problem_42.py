@@ -39,7 +39,7 @@ def is_triangle_word(word: str) -> bool:
 
 def main():
     words = []
-    with open("words.txt", "r") as file:
+    with open("problem_42_words.txt", "r") as file:
         for line in file:
             for word in line.split(","):
                 words.append(word.strip('"'))
