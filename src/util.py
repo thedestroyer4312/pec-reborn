@@ -19,14 +19,14 @@ def swap(arr: List[any], l: int, r: int) -> None:
     arr[l], arr[r] = arr[r], arr[l]
 
 
-def generate_permutations(l: List[A], combiner: Callable[[List[A]], B]) -> Set[B]:
-    def recursive_func(arr: List[A], start_index: int, f: Callable[[List[A]], B]) -> Set[B]:
+def generate_permutations(arr: List[A], f: Callable[[List[A]], B]) -> Set[B]:
+    def recursive_func(start_index: int) -> Set[B]:
         if start_index == len(arr):
             return {f(arr)}
         S = set()
         for i in range(start_index, len(arr)):
             swap(arr, start_index, i)
-            S = S.union(recursive_func(arr, start_index + 1, f))
+            S = S.union(recursive_func(start_index + 1))
             swap(arr, start_index, i)
         return S
-    return recursive_func(l, 0, combiner)
+    return recursive_func(0)
